@@ -3,7 +3,7 @@
 The Candidate Recommendation System is a web-based application built using Streamlit to recommend top candidates for a job description by comparing resumes (PDF, DOC, DOCX, or text files) with job requirements. The system utilizes the LLama3 API model for field extraction from resumes and job descriptions, Sentence Transformers for generating embeddings, and ChromaDB for storing and comparing those embeddings.
 
 ## Demonstration Video
-[Click here to watch the demonstartion](https://www.youtube.com/watch?v=DWFs6aqknqw)
+[Click here to watch the demonstartion](https://drive.google.com/file/d/1LR1LYkmmYKAvBK8xwwRoID7J77LIfBof/view?usp=sharing)
 
 ## Features and Functionalities
 ### Resume Upload and Parsing:
