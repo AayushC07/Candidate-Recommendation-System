@@ -62,98 +62,67 @@ In the extras/ folder, we have an alternative approach for matching resumes with
 
 However, this approach yields very low results due to the complexity and variety in resume formats. Therefore, we’ve moved to key-specific matching for better results, focusing on specific fields like Experience, Skills, Education, etc.
 
-Folder Structure
-├── data
-│   └── job_descriptions.txt
-├── extras
-│   └── overall_matching.py
-├── main.py
-├── requirements.txt
-└── utils
-    ├── __pycache__
-    │   ├── embedding_storing.cpython-313.pyc
-    │   ├── field_extraction.cpython-313.pyc
-    │   ├── pdf_processing.cpython-313.pyc
-    │   ├── reasoning.cpython-313.pyc
-    │   └── similarity_scoring.cpython-313.pyc
-    ├── embedding_storing.py
-    ├── field_extraction.py
-    ├── pdf_processing.py
-    ├── reasoning.py
-    └── similarity_scoring.py
-bash
-Copy
-/Candidate Recommendation System
-├── app/
-│   └── main.py                  # Streamlit app for UI
-├── utils/
-│   ├── pdf_processing.py        # Functions to extract text from PDFs
-│   ├── field_extraction.py      # Functions to extract fields from resumes and job descriptions
-│   ├── embedding_processing.py  # Functions to generate embeddings for resumes and job descriptions
-│   ├── matching.py              # Functions to compute matching scores
-│   └── reasoning.py             # Functions to generate reasons for candidate fit
-├── extras/                      # Code for overall matching (low results)
-│   └── overall_matching.py      # Matches entire resume text with job description text
-└── requirements.txt             # Python dependencies
-Setup and Installation
-Clone the Repository:
+### Folder Structure <br>
+/Candidate Recommendation System <br>
+├ app/ <br>
+│   └ main.py                  # Streamlit app for UI <br>
+├ utils/ <br>
+│   ├ pdf_processing.py        # Functions to extract text from PDFs <br>
+│   ├ field_extraction.py      # Functions to extract fields from resumes and job descriptions <br>
+│   ├ embedding_processing.py  # Functions to generate embeddings for resumes and job descriptions <br>
+│   ├ matching.py              # Functions to compute matching scores <br>
+│   └ reasoning.py             # Functions to generate reasons for candidate fit <br>
+├ extras/                      # Code for overall matching (low results) <br>
+│   └ overall_matching.py      # Matches entire resume text with job description text <br>
+└ requirements.txt             # Python dependencies <br>
 
-bash
-Copy
-git clone <your-repository-url>
-cd <your-project-directory>
-Install Dependencies:
-Create a virtual environment and install the required dependencies.
+### Setup and Installation <br>
+Clone the Repository: <br>
+git clone <your-repository-url> <br>
+cd <your-project-directory> <br>
 
-bash
-Copy
-python -m venv venv
-source venv/bin/activate  # For Windows: venv\Scripts\activate
-pip install -r requirements.txt
-Set Environment Variables:
-Make sure to set the Hugging Face API key for the LLama3 API model inference:
+Install Dependencies: <br>
+Create a virtual environment and install the required dependencies. <br>
 
-bash
-Copy
-export HF_TOKEN=<your-hugging-face-token>
-Run the Streamlit App:
-Start the Streamlit application:
+python -m venv venv <br>
+source venv/bin/activate  # For Windows: venv\Scripts\activate <br>
+pip install -r requirements.txt <br>
+Set Environment Variables: <br>
+Make sure to set the Hugging Face API key for the LLama3 API model inference: <br>
 
-bash
-Copy
-streamlit run app/main.py
-Your app will be available at http://localhost:8501.
+export HF_TOKEN=<your-hugging-face-token> <br>
+Run the Streamlit App: <br>
+Start the Streamlit application: <br>
 
-Explanation of the Code
-Main Logic:
-Resume and Job Description Extraction:
+streamlit run app/main.py <br>
+Your app will be available at http://localhost:8501. <br>
 
-The system extracts fields from resumes and job descriptions using the LLama3 API model from Hugging Face.
+## Explanation of the Code
+### Main Logic:
+Resume and Job Description Extraction: <br>
+<br>
+The system extracts fields from resumes and job descriptions using the LLama3 API model from Hugging Face.<br>
+<br>
+The text from the uploaded resume is parsed using pdfplumber (for PDFs), python-docx (for DOCX), and pywin32 (for DOC files).<br>
+<br>
+Embedding Generation:<br>
+<br>
+After extracting key sections from the resumes and job descriptions, Sentence Transformers are used to generate embeddings for each section.<br>
+<br>
+The embeddings are stored in ChromaDB, which allows fast retrieval and similarity comparison.<br>
+<br>
+Matching and Ranking:<br>
+<br>
+Cosine similarity is computed between the resume embeddings and the job description embeddings to generate a matching score.<br>
+<br>
+The results are ranked based on how well the candidate's resume matches the job description.<br>
+<br>
+Extras Folder:<br>
+Overall Matching Approach:<br>
+<br>
+The extras/overall_matching.py file contains a code that matches the entire resume text with the job description text. This method does not work well in practice and provides low results due to the mismatch in resume formats and the diversity of job descriptions. Hence, the key-specific matching approach (based on field extraction) is preferred and used in the main application. <br>
 
-The text from the uploaded resume is parsed using pdfplumber (for PDFs), python-docx (for DOCX), and pywin32 (for DOC files).
-
-Embedding Generation:
-
-After extracting key sections from the resumes and job descriptions, Sentence Transformers are used to generate embeddings for each section.
-
-The embeddings are stored in ChromaDB, which allows fast retrieval and similarity comparison.
-
-Matching and Ranking:
-
-Cosine similarity is computed between the resume embeddings and the job description embeddings to generate a matching score.
-
-The results are ranked based on how well the candidate's resume matches the job description.
-
-Extras Folder:
-Overall Matching Approach:
-
-The extras/overall_matching.py file contains a code that matches the entire resume text with the job description text. This method does not work well in practice and provides low results due to the mismatch in resume formats and the diversity of job descriptions. Hence, the key-specific matching approach (based on field extraction) is preferred and used in the main application.
-
-Future Improvements
-Support for .doc Files: The current implementation only supports .docx files for resume extraction. Future improvements can include adding support for older .doc files.
-
-Advanced Matching Algorithms: Incorporate more sophisticated matching algorithms or machine learning models to improve the accuracy of matching candidates with job descriptions.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+Future Improvements <br>
+Support for .doc Files: The current implementation only supports .docx files for resume extraction. Future improvements can include adding support for older .doc files. <br>
+<br>
+Advanced Matching Algorithms: Incorporate more sophisticated matching algorithms or machine learning models to improve the accuracy of matching candidates with job descriptions.<br>
