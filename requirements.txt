@@ -4,7 +4,7 @@ numpy
 python-docx
 langchain
 openai
-sentence-transformer
+sentence-transformers
 scikit-learn
 torch
 huggingface-hub
