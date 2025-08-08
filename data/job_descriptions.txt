@@ -1,0 +1,208 @@
+-- JAVA DEVELOPER--
+
+About the job
+Role: Java Developer
+
+ Client: People Tech Group
+
+ Location: Redmond, WA (On-site). 
+
+
+
+A highly skilled Java Developer with experience in designing, developing, and deploying applications for Amazon clients, leveraging AWS services. Proficient in building scalable, secure, and high-performance solutions using core Java technologies and frameworks such as Spring Boot and Hibernate. Experienced in integrating Java applications with various AWS services like EC2, S3, Lambda, RDS, and CloudWatch.
+ 
+
+ Job Responsibilities:
+
+Expertise in Java development with a strong focus on object-oriented programming, multithreading, and data structures.
+Experience with AWS cloud infrastructure, including deploying applications on EC2, managing databases with RDS, and utilizing Lambda functions for Serverless computing.
+Solid understanding of microservices architecture and RESTful API development.
+Hands-on experience in DevOps practices, CI/CD pipelines, and Docker containerization.
+Strong problem-solving skills and a focus on optimizing application performance and reliability.
+
+-- Python Developer --
+Job Title: Python Developer
+Location: [Remote / On-site – specify location]
+Job Type: [Full-Time / Contract]
+Experience Level: Mid-Level (3+ years)
+Job Description:
+We are seeking a skilled and proactive Python Developer to join our dynamic software development team. The ideal candidate will have a strong background in backend development using Python, with experience in frameworks such as Django and Flask. You will be responsible for developing scalable web applications, managing databases, and contributing to the full software development lifecycle in an agile environment.
+
+Key Responsibilities:
+Design, develop, test, and deploy web applications using Python, Django, and Flask.
+
+Collaborate with cross-functional teams to define, design, and ship new features.
+
+Develop and maintain RESTful APIs and backend logic for web platforms.
+
+Work with SQL and NoSQL databases to ensure data integrity, performance, and security.
+
+Optimize applications for maximum speed and scalability.
+
+Write clean, maintainable, and efficient code while following best practices and coding standards.
+
+Participate in code reviews, unit testing, and continuous integration/deployment (CI/CD).
+
+Stay updated with emerging technologies and frameworks, contributing to continuous improvement.
+
+Qualifications:
+3+ years of professional experience in Python development.
+
+Proficiency with web frameworks such as Django and Flask.
+
+Hands-on experience with database management systems – both SQL (e.g., PostgreSQL, MySQL) and NoSQL (e.g., MongoDB).
+
+Experience in working within agile teams, using tools like Jira, Git, etc.
+
+Strong problem-solving skills and the ability to automate tasks using data analysis tools.
+
+Familiarity with cloud services (AWS, GCP, or Azure) is a plus.
+
+Excellent communication skills and the ability to collaborate effectively with remote teams.
+
+Education:
+Bachelor’s or Master’s degree in Computer Science, Data Science, or a related field.
+
+Advanced coursework or thesis experience in machine learning, AI, or data analytics is a plus.
+
+Preferred Skills (Bonus):
+Experience with DevOps tools and CI/CD pipelines.
+
+Exposure to containerization technologies like Docker.
+
+Background in data science or predictive analytics using Python.
+
+
+-- Software Developer -- 
+As a Senior Software Engineer, you will focus on engineering complex user interfaces with rich interactions. You will use your deep UI engineering and creative skills to take an influential role in iterating and continuously deploying new features, functionality, and products to our customers.  You will be an important part of a lean DevOps and automation culture where we’ll be looking for you to collaborate with the backend and product teams to drive UI architectures, development standards, and to build optimized experiences for our end-users.
+
+The candidate must be fluent in JavaScript and TypeScript, while also combining expertise with modern reactive JavaScript libraries, tools, and runtimes to engineer abstract, secure, reusable, and testable UI components and applications.  This person should also have home-grown Design System experience, having collaborated tightly with creative teams to champion and influence component reusability, maintainability, and configurability across a diverse UI portfolio.  The right person should also blend his/her engineering abilities with a sense of pixel-perfect craftsmanship, turning user stories, wireframes, and prototypes into fully functional UI, highly-optimized components and applications. 
+
+Responsibilities
+
+Provide hands-on UI engineering expertise and collaborate with leads and teams to design, architect, and optimize cloud-native, service-oriented applications and UI components.
+
+Champion quality engineering practices like linting, unit testing, web UI testing, and pipeline automation to enable continuous deployment.
+
+Mentor and lead junior staff through reference implementations, code reviews, and defining best practices for engineering.
+
+Collaborate with product teams to establish and maintain design system standards, processes, and adoption.
+
+Design high-performing web applications by applying creative problem-solving, logical reasoning, and optimization techniques.
+
+Investigate and resolve production issues, ensuring seamless functionality from UI to service layer.
+
+Work closely with project managers to ensure timely, high-quality project deliverables while fostering team alignment and effectiveness.
+
+Required Qualifications
+
+Bachelor’s degree in Computer Science or related field, with 5+ years of experience in web application development or software engineering using modern frameworks.
+
+Expertise in JavaScript, TypeScript, and a UI stack (e.g., React, Next.js/Remix.run, TailwindCSS/SCSS), with proficiency in REST patterns, Web APIs, and reactive programming.
+
+Experience designing performant RESTful services with SQL/NoSQL databases and leveraging tools like GitLab CI/CD, Docker, Kubernetes/Helm, and AWS.
+
+Strong understanding of browser, device, OS compatibility, and user-agent interoperability.
+
+Proven track record of writing testable UI code and delivering high-quality solutions in Agile and Lean environments.
+
+Excellent communication and problem-solving skills with attention to detail and a passion for technical craft.
+
+Preferred Qualifications
+
+Master’s degree in a related technical field.
+
+Experience in digital advertising, working with vendor teams, and delivering high-quality results.
+
+Strong curiosity about Disney’s innovative approach to delivering magical experiences.
+
+
+-- Data Scientist --
+Data Scientist Responsibilities
+Collaborate with cross-functional data and business teams to define problems, analyze impacts, identify opportunities, and develop solutions that improve decision-making and efficiency.
+Translate business challenges into data-driven problems and design appropriate data science solutions, including metrics and analytics, business intelligence, experimentation
+Identify operational gaps, build analytical models to derive insights, and support decision-making across organizational leadership.
+Design and implement statistical models such as hypothesis testing, forecasting, statistical process control, and simulation to influence critical business decisions and Data Center operations.
+Utilize expertise in statistics, machine learning, optimization, and automation to develop analytics solutions.
+Work closely with stakeholders, data engineers, and program/product managers to ensure seamless progress.
+Educate and influence stakeholders to enhance operational efficiency with empathy.
+Recommend process improvements based on operational data and user behavior to boost business performance.
+Mentor team members on data science best practices.
+Minimum Qualifications
+Bachelor's degree in Computer Science, Computer Engineering, relevant technical field, or equivalent practical experience.
+6+ years of experience (2 years+ of experience post Ph.D.) with advanced SQL in big data environments (e.g., Hive, Presto, Spark) and data modeling.
+6+ years of experience (2 years+ of experience post Ph.D.) managing and analyzing large-scale data using Python, R, or similar languages.
+6+ years of experience (2 years+ of experience post Ph.D.) of working with visualization tools such as Tableau, PowerBI, or similar.
+6+ years experience (2 years+ of experience post Ph.D.) analyzing and interpreting data, developing metrics, drawing conclusions, recommending actions, and reporting results across stakeholders.
+Experience in enhancing data collection procedures, data processing, cleansing, and verifying the integrity of data used for analysis
+Proven track record of managing and leading cross-functional projects and teams.
+Solid understanding of machine learning techniques and algorithms.
+Hands-on programming experience in one or more of: AI/ML, LLM, NLP, Statistical modeling.
+Proficient in statistical analysis and experimental design.
+Preferred Qualifications
+Technical knowledge of data center operations
+Masters degree in Computer Science, Engineering, Mathematics, Statistics, Operations Research, or a related analytical field.
+Knowledge of simulation and optimization techniques
+Great communication and storytelling skills to influence all organizational levels (engineers, executives and cross functional teams) to drive business decisions
+
+-- Machine Learning Engineer --
+Job Title: Machine Learning Engineer – Intelligent Document Processing
+Location: San Jose, CA / Hybrid
+Job Type: Full-Time
+
+About the Role
+We are seeking a highly skilled Machine Learning Engineer with expertise in Generative AI, Large Language Models (LLMs), and intelligent document processing. The ideal candidate will have hands-on experience developing and deploying AI-driven solutions that automate data extraction, enhance operational efficiency, and deliver high-accuracy results across diverse data formats.
+
+You will work on projects involving GPT-based models, prompt engineering, NER, and RAG pipelines, collaborating with cross-functional teams to design scalable systems that process large volumes of structured and unstructured data.
+
+Key Responsibilities
+Design, develop, and deploy AI-powered document extraction solutions using LLMs, NLP, and NER models.
+
+Implement prompt engineering strategies and structured output pipelines to improve model accuracy and consistency.
+
+Benchmark LLM performance against traditional ML models, driving continuous improvements in precision and recall.
+
+Build and optimize data pipelines using cloud services such as Google Cloud Functions, BigQuery, and Azure/AWS equivalents.
+
+Integrate retrieval-augmented generation (RAG) architectures for scalable, context-aware document query systems.
+
+Develop and maintain APIs, back-end workflows, and interactive UIs for AI-powered tools using Flask, Streamlit, and related frameworks.
+
+Collaborate with data engineers and DevOps teams to ensure CI/CD integration and robust monitoring.
+
+Apply computer vision techniques (OpenCV, Dlib) for multi-modal AI solutions such as real-time detection systems.
+
+Required Qualifications
+Master’s degree in Applied Data Science, Computer Engineering, or related field.
+
+Strong programming skills in Python, SQL, NoSQL, and frameworks like PyTorch, TensorFlow, Keras.
+
+Proven experience with Generative AI, LLMs (e.g., GPT-3.5, GPT-4, Hugging Face Transformers), and NLP pipelines.
+
+Experience with Google Cloud Platform and familiarity with Azure and AWS.
+
+Expertise in data preprocessing, feature engineering, and model deployment.
+
+Strong understanding of machine learning algorithms including logistic regression, SVM, decision trees, ensemble models, and neural networks.
+
+Preferred Skills
+Experience with LangChain, ChromaDB, and vector databases.
+
+Knowledge of RAG architectures and semantic search techniques.
+
+Familiarity with big data tools such as Spark and Hadoop.
+
+Publication history in AI/ML research conferences.
+
+Leadership experience mentoring interns or managing technical teams.
+
+What We Offer
+Opportunity to work on cutting-edge AI and Generative AI projects.
+
+Competitive salary and performance bonuses.
+
+Health, dental, and vision insurance.
+
+Learning and development budget for conferences and certifications.
+
+Collaborative and innovative team environment.
