@@ -1,4 +1,5 @@
 from utils.pdf_processing import extract_text_from_pdf
+from utils.word_file_processin import extract_text_from_docx
 from utils.field_extraction import extract_jd_fields
 from utils.field_extraction import extract_resume_fields
 from utils.embedding_storing import jd_section_embeddings, resume_section_embeddings, client_chroma, model
@@ -41,6 +42,8 @@ if uploaded_files and job_description and submit_button:
             resume_text = extract_text_from_pdf(file)
         elif file.type == "text/plain":
             resume_text = file.read().decode("utf-8")
+        elif file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            resume_text = extract_text_from_docx(file)
         else:
             st.error("Unsupported file type. Please upload PDF or text files.")
             break
