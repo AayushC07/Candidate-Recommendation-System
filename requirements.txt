@@ -11,4 +11,3 @@ huggingface-hub
 pdfplumber
 chromadb
 disutils
-pysqlite3-binary==0.4.6
