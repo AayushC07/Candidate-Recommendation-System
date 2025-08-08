@@ -1,28 +1,28 @@
-Candidate Recommendation System
-Overview
+# Candidate Recommendation System
+## Overview
 The Candidate Recommendation System is a web-based application built using Streamlit to recommend top candidates for a job description by comparing resumes (PDF, DOC, DOCX, or text files) with job requirements. The system utilizes the LLama3 API model for field extraction from resumes and job descriptions, Sentence Transformers for generating embeddings, and ChromaDB for storing and comparing those embeddings.
 
-Demonstration Video
-[]
+## Demonstration Video
+[Click here to watch the demonstartion](https://www.youtube.com/watch?v=DWFs6aqknqw)
 
-Features and Functionalities
-Resume Upload and Parsing:
+## Features and Functionalities
+### Resume Upload and Parsing:
 
 The application allows users to upload multiple resume files in PDF, DOC, DOCX, and Text formats.
 
 Each resume is parsed to extract key fields such as Candidate Name, Email, Experience, Education, Skills, etc.
 
-Job Description Input:
+### Job Description Input:
 
 Users can input the job description for which they want to find the best-fit candidates.
 
 The job description is processed to extract essential fields, including Job Title, Responsibilities, Required Skills, Experience Level, etc.
 
-Field Extraction Using LLama3 API Model:
+### Field Extraction Using LLama3 API Model:
 
 The system uses the LLama3 API model (via Hugging Face's InferenceClient) to extract specific fields from the uploaded resumes and job descriptions. This extraction includes sections like Experience, Education, Skills, etc., and returns them in a structured JSON format.
 
-Embedding Generation and Matching:
+### Embedding Generation and Matching:
 
 Sentence Transformers are used to generate embeddings for both resume and job description fields.
 
@@ -30,7 +30,7 @@ These embeddings are stored in ChromaDB collections for efficient similarity com
 
 Cosine similarity is computed between resume embeddings and job description embeddings to evaluate how well a candidate fits the job description.
 
-Candidate Scoring:
+### Candidate Scoring:
 
 The application calculates a matching score based on various factors, including:
 
@@ -50,19 +50,37 @@ Certifications ↔ Certifications
 
 Extra Curriculum Activities ↔ Extra Curriculum Activities
 
-Ranking of Candidates:
+### Ranking of Candidates:
 
 After calculating the matching scores, the candidates are ranked based on their fit for the job.
 
 The top candidates are displayed with their scores and reasons for eligibility.
 
-Additional Features (Extras Folder):
+### Additional Features (Extras Folder):
 
 In the extras/ folder, we have an alternative approach for matching resumes with job descriptions, where we attempt to match the entire resume text with the job description text.
 
 However, this approach yields very low results due to the complexity and variety in resume formats. Therefore, we’ve moved to key-specific matching for better results, focusing on specific fields like Experience, Skills, Education, etc.
 
 Folder Structure
+├── data
+│   └── job_descriptions.txt
+├── extras
+│   └── overall_matching.py
+├── main.py
+├── requirements.txt
+└── utils
+    ├── __pycache__
+    │   ├── embedding_storing.cpython-313.pyc
+    │   ├── field_extraction.cpython-313.pyc
+    │   ├── pdf_processing.cpython-313.pyc
+    │   ├── reasoning.cpython-313.pyc
+    │   └── similarity_scoring.cpython-313.pyc
+    ├── embedding_storing.py
+    ├── field_extraction.py
+    ├── pdf_processing.py
+    ├── reasoning.py
+    └── similarity_scoring.py
 bash
 Copy
 /Candidate Recommendation System
