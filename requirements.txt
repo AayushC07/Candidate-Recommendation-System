@@ -10,4 +10,3 @@ torch
 huggingface-hub
 pdfplumber
 chromadb
-disutils

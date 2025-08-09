@@ -6,8 +6,6 @@ from utils.embedding_storing import jd_section_embeddings, resume_section_embedd
 from utils.reasoning import reasoning_function
 from utils.similarity_scoring import matching_score
 import streamlit as st
-import os
-os.environ["PYTHON_SQLITE"] = "pysqlite3"
 import chromadb
 
 # Initialize ChromaDB client
