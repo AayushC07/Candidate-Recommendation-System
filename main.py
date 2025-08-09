@@ -6,10 +6,7 @@ from utils.embedding_storing import jd_section_embeddings, resume_section_embedd
 from utils.reasoning import reasoning_function
 from utils.similarity_scoring import matching_score
 import streamlit as st
-import chromadb
 
-# Initialize ChromaDB client
-client_chroma = chromadb.Client()
 
 # Streamlit setup for the UI
 st.title("Candidate Recommendation System")
