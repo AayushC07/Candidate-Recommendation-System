@@ -1,41 +1,57 @@
-import chromadb
+import faiss
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+import pickle
 
-def matching_score(collection_resume, collection_jd, i):
-    relation1_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_experience"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["job_title"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation2_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_experience_projects"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["responsibilities"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation3_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_experience_skills"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["required_skills"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation4_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_education"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["educational_qualifications"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation5_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_experience"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["experience_level"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation6_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_leadership"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["leadership_experience"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation7_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_certifications"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["certifications"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    relation8_score = cosine_similarity(
-        [collection_resume.get(ids=[f"candidate{i}_extra_curriculum"], include=['embeddings'])['embeddings'][0]],
-        [collection_jd.get(ids=["extra_curriculum"], include=['embeddings'])['embeddings'][0]]
-    )[0][0].item()
-    print(relation1_score, relation2_score, relation3_score, relation4_score,
-          relation5_score, relation6_score, relation7_score, relation8_score)
+# Files for FAISS
+JD_INDEX_FILE = "faiss_jd.index"
+JD_METADATA_FILE = "faiss_jd_metadata.pkl"
+
+RESUME_INDEX_FILE = "faiss_resume.index"
+RESUME_METADATA_FILE = "faiss_resume_metadata.pkl"
+
+def load_faiss(index_file, metadata_file, embedding_dim):
+    index = faiss.read_index(index_file)
+    with open(metadata_file, "rb") as f:
+        metadata = pickle.load(f)
+    return index, metadata
+
+def get_vector_by_id(doc_id, index, metadata):
+    try:
+        idx = metadata.index(doc_id)
+        vec = index.reconstruct(idx)
+        return vec
+    except ValueError:
+        return None
+
+def matching_score(i):
+    embedding_dim = 384  # all-MiniLM-L6-v2 dimension
+
+    resume_index, resume_metadata = load_faiss(RESUME_INDEX_FILE, RESUME_METADATA_FILE, embedding_dim)
+    jd_index, jd_metadata = load_faiss(JD_INDEX_FILE, JD_METADATA_FILE, embedding_dim)
+
+    # IDs to compare, matching original logic
+    pairs = [
+        (f"candidate{i}_experience", "job_title"),
+        (f"candidate{i}_experience_projects", "responsibilities"),
+        (f"candidate{i}_experience_skills", "required_skills"),
+        (f"candidate{i}_education", "educational_qualifications"),
+        (f"candidate{i}_experience", "experience_level"),
+        (f"candidate{i}_leadership", "leadership_experience"),
+        (f"candidate{i}_certifications", "certifications"),
+        (f"candidate{i}_extra_curriculum", "extra_curriculum"),
+    ]
+
+    scores = []
+    for resume_id, jd_id in pairs:
+        r_vec = get_vector_by_id(resume_id, resume_index, resume_metadata)
+        j_vec = get_vector_by_id(jd_id, jd_index, jd_metadata)
+        if r_vec is not None and j_vec is not None:
+            sim = cosine_similarity([r_vec], [j_vec])[0][0]
+        else:
+            sim = 0.0
+        scores.append(sim)
+
     section_weights = {
         "relation1": 0.05,
         "relation2": 0.30,
@@ -48,7 +64,8 @@ def matching_score(collection_resume, collection_jd, i):
     }
 
     final_score = 0.0
-    for key, value in section_weights.items():
-        final_score += locals()[key + "_score"] * value
+    for idx, weight in enumerate(section_weights.values(), start=1):
+        final_score += scores[idx - 1] * weight
 
-    return final_score  # Return the matching score for relation1 only for simplicity
+    print(*scores)
+    return final_score

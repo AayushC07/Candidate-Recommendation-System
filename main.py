@@ -1,81 +1,75 @@
+import streamlit as st
+import os
 from utils.pdf_processing import extract_text_from_pdf
 from utils.word_file_processin import extract_text_from_docx
-from utils.field_extraction import extract_jd_fields
-from utils.field_extraction import extract_resume_fields
-from utils.embedding_storing import jd_section_embeddings, resume_section_embeddings, client_chroma, model
-from utils.reasoning import reasoning_function
+from utils.field_extraction import extract_jd_fields, extract_resume_fields
+from utils.embedding_storing import jd_section_embeddings, resume_section_embeddings
 from utils.similarity_scoring import matching_score
-import streamlit as st
+from utils.reasoning import reasoning_function
 
+# Setup for FAISS index files
+for f in ["faiss_jd.index", "faiss_jd_metadata.pkl", "faiss_resume.index", "faiss_resume_metadata.pkl"]:
+    if os.path.exists(f):
+        os.remove(f)
 
-# Streamlit setup for the UI
+# Streamlit app setup
 st.title("Candidate Recommendation System")
 
-uploaded_files = st.file_uploader("Upload Candidate Resumes (PDFs)", accept_multiple_files=True)
+uploaded_files = st.file_uploader("Upload Candidate Resumes (PDFs, DOCX, TXT)", accept_multiple_files=True)
 
 job_description = st.text_area("Enter Job Description:")
 
 submit_button = st.button("Compare Resumes with Job Description")
 
-if uploaded_files and job_description and submit_button:
-
-    progress = st.progress(0)
-    total_files = len(uploaded_files)
-
-    jd_fields = extract_jd_fields(job_description)  # Extract fields from the job description
-    st.text("Extracting Job Description fields...")
-
-    if not jd_fields:
-        st.error("Could not extract fields from the job description. Please check the format.")
+if submit_button:
+    if not uploaded_files:
+        st.error("Please upload at least one resume file.")
+    elif not job_description.strip():
+        st.error("Please enter a job description.")
     else:
-        jd_section_embeddings(jd_fields)    # Generate embeddings for the job description fields
-        
-    score_dict = {}
-    i = 1
-
-    # Process each uploaded resume file and extract fields for resume comparison
-    for file in uploaded_files:
-        if file.type == "application/pdf":
-            resume_text = extract_text_from_pdf(file)
-        elif file.type == "text/plain":
-            resume_text = file.read().decode("utf-8")
-        elif file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-            resume_text = extract_text_from_docx(file)
+        jd_fields = extract_jd_fields(job_description)
+        if not jd_fields:
+            st.error("Could not extract fields from job description. Please check the format.")
         else:
-            st.error("Unsupported file type. Please upload PDF or text files.")
-            break
+            st.text("Generating job description embeddings...")
+            jd_section_embeddings(jd_fields)
 
-        resume_fields = extract_resume_fields(resume_text)  # Extract fields from the resume text
-        
-        if not resume_fields:
-            st.error(f"Could not extract fields from {file.name}. Please check the resume format.")
-            continue
-        
-        st.text(f"Parsing resume {i}/{total_files}...")
-        
-        resume_section_embeddings(resume_fields,i)  # Generate embeddings for the resume fields
-        progress.progress(int((i / total_files) * 100))
+            st.text("Processing resumes and generating embeddings...")
+            score_dict = {}
+            total_files = len(uploaded_files)
+            i = 1
 
-        collection_resume = client_chroma.get_collection(name="candidate_resume_embeddings")
-        collection_jd = client_chroma.get_collection(name="candidate_jd_embeddings")
+            for file in uploaded_files:
+                if file.type == "application/pdf":
+                    resume_text = extract_text_from_pdf(file)
+                elif file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                    resume_text = extract_text_from_docx(file)
+                elif file.type == "text/plain":
+                    resume_text = file.read().decode("utf-8")
+                else:
+                    st.warning(f"Unsupported file type for {file.name}, skipping.")
+                    continue
 
-        reason = reasoning_function(resume_fields, jd_fields)  # Generate reasoning for the match
+                resume_fields = extract_resume_fields(resume_text)
+                if not resume_fields:
+                    st.warning(f"Could not extract fields from {file.name}, please check format.")
+                    continue
 
-        score= matching_score(collection_resume, collection_jd, i)  # Calculate the matching score between the resume fields and job description fields
-        score_dict[resume_fields['Candidate Name']] = {"score": score, "reason": reason}
+                st.text(f"Parsing resume {i}/{total_files}...")
 
-        st.text(f"Resume {i} processed with score: {score:.4f}")
-        i += 1
-    
-    st.text("Processing completed!")
-    progress.empty()
+                resume_section_embeddings(resume_fields, i)
 
-    # Display the matching scores for each candidate
-    sort_dict = dict(sorted(score_dict.items(), key=lambda item: item[1]["score"], reverse=True))
-    st.subheader("Top Candidates Based on Matching Scores:")
-    top_5_candidates = list(sort_dict.items())[:5]
-    for candidate_name, data in top_5_candidates:
-        score = data["score"]
-        reason = data["reason"]
-        st.write(f"{candidate_name}: {score:.4f}")
-        st.write(f"Reason for eligibility: {reason}")
+                reason = reasoning_function(resume_fields, jd_fields)
+                score = matching_score(i)
+                score_dict[resume_fields['Candidate Name']] = {"score": score, "reason": reason}
+
+                st.text(f"Resume {i} processed with score: {score:.4f}")
+                i += 1
+
+            st.success("Processing completed!")
+
+            sorted_candidates = sorted(score_dict.items(), key=lambda x: x[1]["score"], reverse=True)
+            st.subheader("Top Candidates Based on Matching Scores:")
+            for candidate, data in sorted_candidates[:5]:
+                st.write(f"{candidate}: {data['score']:.4f}")
+                st.write(f"Reason for eligibility: {data['reason']}")
