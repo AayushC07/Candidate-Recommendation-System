@@ -9,4 +9,4 @@ scikit-learn
 torch
 huggingface-hub
 pdfplumber
-chromadb
+faiss-cpu
